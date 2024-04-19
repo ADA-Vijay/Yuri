@@ -1,0 +1,228 @@
+
+.logo {
+  font-weight: bold;
+  display: flex;
+    align-items: center;
+    font-size: 2rem !important;
+}
+.logo img{
+  width: 285px;
+  height: 100%;
+}
+.navLinks {
+  display: flex;
+  align-items: center;
+}
+
+.logout {
+  padding: 5px;
+  border: none;
+  background-color: #53c28b;
+  color: white;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.navBody{
+  display: flex;
+  justify-content: space-between;
+}
+.navItems{
+  display: flex;
+  align-items: center;
+}
+.navItem {
+  margin-right: 1.5rem;
+  position: relative;
+}
+.navItem:hover .navItemList{
+  display: block;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 2;
+    background-color: var(--bodyColor);
+}
+.navItemList{
+  display: none;
+}
+/* .navLinks .navItem{
+  padding: 0;
+} */
+.navItemList a{
+  padding: 1rem;
+    display: block;
+    width: 202px;
+}
+.headerWrap {
+  background-color: var(--headerBg);
+  color: var(--headerColor);
+  height: 7rem;
+  display: flex;
+    align-items: center;
+}
+.headerWrap a{
+  text-transform: uppercase;
+  color: var(--headerColor);
+  font-size: 1.6rem;
+  text-decoration: none;
+}
+.headerWrap a:hover,
+.headerWrap a:focus,
+.headerWrap a:active,
+.headerWrap a.active,
+.headerWrap a.show{
+  color: var(--headerColor) !important;
+  background-color: var(--headerBg);
+}
+.headerDropdown [data-bs-popper="static"]{
+  background-color: var(--headerBg);
+}
+.extraHeaderWrap{
+  display: flex;
+  align-items: center;
+}
+.searchHeaderWrap{
+  position: relative;
+}
+.searchInput{
+
+ 
+}
+.searchInput input{
+  background-color: var(--headerSearchBg);
+  color: var(--headerSearchColor);
+  border-color: var(--headerSearchColor);
+  font-size: 1.6rem;
+  display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-clip: padding-box;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    padding-left: 3.2rem;
+}
+.searchInput input:hover,
+.searchInput input:active,
+.searchInput input:focus{
+  background-color: var(--headerSearchBg);
+  color: var(--headerSearchColor);
+  border-color: var(--headerSearchColor);
+  box-shadow: unset;
+}
+.searchIcon{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+.searchIcon svg{
+  height: 15px;
+  width: 15px;
+}
+.headerMenuWrap{
+  display: flex;
+  align-items: center;
+}
+.headerMenuWrap svg{
+  height: 25px;
+  width: 25px;
+}
+.headerlink,
+.searchHeaderWrap,
+.headerMenuWrap,
+.headerDropdown{
+  margin-right: 15px;
+}
+
+
+.navLink{
+  text-decoration: none !important;
+}
+
+
+.mobSearchLink{
+  display: none;
+}
+.DesktopLogo{
+  display: block;
+}
+.mobLogo{
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .DesktopLogo{
+    display: none;
+  }
+  .mobLogo{
+    display: block;
+  }
+  .logo img{
+    width: 155px;
+    height: 85px;
+  }
+  
+  
+  .mobSearchWrap{
+    display: block;
+  }
+  .mobSearchContent{
+    display: none;
+  }
+  .mobSearchLink{
+    display: block;
+  }
+  .mobSearchLink{
+    background-color: var(--headerSearchBg);
+    color: var(--headerSearchColor);
+    border-color: var(--headerSearchColor);
+    box-shadow: unset;
+    line-height: 1.5;
+  }
+  .mobSearchWrap:hover .mobSearchContent{
+    display: block;
+    position: absolute;
+    top: 100%;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+  }
+  .headerWrap{
+    position: relative;
+  }
+  .searchHeaderWrap{
+    width: 100%;
+    margin: 0 !important;
+  }
+  .searchInput{
+    width: 100%;
+  }
+  .searchInput input{
+    height: 45px;
+    padding-left: 3.7rem;
+  }
+  .searchIcon{
+    top: 15px;
+    left: 15px;
+  }
+
+}
+
+.navItemList{
+  height: 400px;
+  overflow-y: auto;
+}
+
+
