@@ -1,105 +1,78 @@
-import Link from "next/link";
 import React from "react";
-import styles from "./navbar.module.css";
-import stylePage from "../../app/page.module.css";
-import SearchComponent from "@/components/search/search"
-async function getData() {
-  const res = await fetch("https://ashgamewitted.wpcomstaging.com/wp-json/wp/v2/categories?per_page=50",
+import AppConfig from "../../../AppConfig";
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Link from 'next/link';
+// import EnquiryModal from '@/components/enquiryModal';
+const brand = [
   {
-    next: {revalidate:180},
-  }
-  );
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  
-  const rawData = await res.json();
-  const organizedData = organizeCategories(rawData);
-  return organizedData;
-}
-function organizeCategories(data) {
-  const organizedList = [];
-  const parentMap = {};
-  data.forEach(item => {
-    if (item.parent === 0) {
-      organizedList.push({
-        id: item.id,
-        name: item.name,
-        slug: item.slug,
-        children: []
-      });
-    } else {
-      if (!parentMap[item.parent]) {
-        parentMap[item.parent] = [];
+    "cat_id": 1,
+    "name": "Our Brands",
+    "url_name": "/OurBrands",
+    "sub_categories": [
+      {
+        "sub_id": 1,
+        "name": "Dayuri",
+        "url_name": "#Dayuri"
+      },
+      {
+        "sub_id": 2,
+        "name": "Yuri",
+        "url_name": "#Yuri"
+      },
+      {
+        "sub_id": 3,
+        "name": "Gaocheng",
+        "url_name": "#GAOCHENG"
+      },
+      {
+        "sub_id": 4,
+        "name": "GC Power",
+        "url_name": "#GCPower"
+      },
+      {
+        "sub_id": 6,
+        "name": "Yuri Speed",
+        "url_name": "#YuriSpeed"
+      },
+      {
+        "sub_id": 7,
+        "name": "Workpro",
+        "url_name": "#Workpro"
       }
-      parentMap[item.parent].push({
-        id: item.id,
-        name: item.name,
-        slug: item.slug,
-
-      });
+    ]
+  },
+]
+async function getDetails(){
+  try {
+    const response = await fetch(`${AppConfig.api}Category/GetAllTypeCategory`);
+    if (response.ok) {
+      const responseData = await response.json();
+      const categoriesData = JSON.parse(responseData.respObj);
+      const categories = categoriesData.categories;
+      return categories;
+    } else {
+      throw new Error('Failed to fetch categories');
     }
-  });
-
-  organizedList.forEach(parent => {
-    const children = parentMap[parent.id] || [];
-    parent.children = children;
-  });
-
-  return organizedList;
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    return [];
+  }
 }
 
-const Navbar =  async () => {
-  const data = await getData();
 
+const Navbar = async() => {
+  const categories = await getDetails()
+  if(categories){
+    console.log("categories",categories)
+  }
   return (
-    <div className={styles.headerWrap}>
-      <div className={stylePage.container}>
-        <div className={styles.navBody}>
-        <Link href="/" className={styles.logo}>
-          <img className={styles.DesktopLogo} src="https://fama.b-cdn.net/gw/gwlogo.png" alt="logo"/>
-          <img className={styles.mobLogo} src="https://fama.b-cdn.net/gw/Gamewitted.png" alt="logo"/>
-        </Link>
-        <div className={styles.navItems}>
-          <div className={styles.navLinks}>
-            {data.map((link) => (
-              <div className={styles.navItem}>
-                <Link key={link.id} href={`/${link.slug}`} className={styles.link} prefetch={true}>
-                  {link.name}
-                </Link>
-                <div className={styles.navItemList}>
-                  {link.children.map((child)=> (
-                    <Link key={child.id} href={`/${child.slug}`} className={styles.link} prefetch={true}>
-                    {child.name}
-                  </Link>
-                  ))}
-                </div>  
-              </div>
-            ))}
-          </div>
-          <div className={styles.mobSearchWrap}>
-            <div className={styles.mobSearchLink}>
-              <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  className="bi bi-search"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                </svg>
-            </div>
-            <div className={styles.mobSearchContent}>
-              <SearchComponent />
-            </div>
-          </div>
-        </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+   <>
+    
+   </>
+  )
+}
 
-export default Navbar;
+
+
+export default Navbar

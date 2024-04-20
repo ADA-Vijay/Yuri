@@ -4,40 +4,40 @@ import ListingPage from "@/components/listing/listing";
 import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
-async function getData() {
-  const ApiUrl = "https://ashgamewitted.wpcomstaging.com/wp-json/wp/v2/";
-  const trendingId = 606508208;
-  try {
-    const response = await fetch(
-      ApiUrl + "posts?per_page=10&order=desc&orderby=date&_embed=1",
-      {
-        next: {revalidate:180},
-      }
-    );
-    const newdata = await response.json();
+// async function getData() {
+//   const ApiUrl = "https://ashgamewitted.wpcomstaging.com/wp-json/wp/v2/";
+//   const trendingId = 606508208;
+//   try {
+//     const response = await fetch(
+//       ApiUrl + "posts?per_page=10&order=desc&orderby=date&_embed=1",
+//       {
+//         next: {revalidate:180},
+//       }
+//     );
+//     const newdata = await response.json();
 
-    const trending = await fetch(
-      `${ApiUrl}posts?tags=${trendingId}&_embed&per_page=3&orderby=date&order=desc`,
-      {
-        next: {revalidate:180},
-      }
-    );
-    const trendingPosts = await trending.json();
+//     const trending = await fetch(
+//       `${ApiUrl}posts?tags=${trendingId}&_embed&per_page=3&orderby=date&order=desc`,
+//       {
+//         next: {revalidate:180},
+//       }
+//     );
+//     const trendingPosts = await trending.json();
 
-    if (trendingPosts) {
-      return {
-        newdata,
-        trendingPosts,
-      };
-    }
-  } catch (error) {
-    throw new Error("Failed to fetch data");
-  }
-}
+//     if (trendingPosts) {
+//       return {
+//         newdata,
+//         trendingPosts,
+//       };
+//     }
+//   } catch (error) {
+//     throw new Error("Failed to fetch data");
+//   }
+// }
 
-export async function generateMetadata({ params }) {
-  const { newdata, trendingPosts } = await getData(params.query);
-  if (newdata && newdata.length > 0) {
+// export async function generateMetadata({ params }) {
+  // const { newdata, trendingPosts } = await getData(params.query);
+  // if (newdata && newdata.length > 0) {
     //   return {
     //     title: newdata[0].yoast_head_json.title,
     //      description: newdata[0].yoast_head_json.description,
@@ -50,25 +50,25 @@ export async function generateMetadata({ params }) {
     //        },
     //      ],
     //  };
-    return {
-      title: "GameWitted",
-      description:
-        "Welcome to Gamewitted, your ultimate destination for immersive gaming and captivating anime content! Dive into a world where pixels meet passion, as we bring you the latest updates, reviews, and insights from the gaming and anime realms.",
-      images: [
-        {
-          url: "https://fama.b-cdn.net/gw/gwlogo.png",
-          height: 1200,
-          width: 600,
-          alt: "Alt",
-        },
-      ],
-    };
-  }
-}
+//     return {
+//       title: "GameWitted",
+//       description:
+//         "Welcome to Gamewitted, your ultimate destination for immersive gaming and captivating anime content! Dive into a world where pixels meet passion, as we bring you the latest updates, reviews, and insights from the gaming and anime realms.",
+//       images: [
+//         {
+//           url: "https://fama.b-cdn.net/gw/gwlogo.png",
+//           height: 1200,
+//           width: 600,
+//           alt: "Alt",
+//         },
+//       ],
+//     };
+//   }
+// }
 
 const Home = async () => {
-  const { newdata, trendingPosts } = await getData();
-  const apiUrl = "posts?per_page=10&order=desc&orderby=date&_embed=1"
+  // const { newdata, trendingPosts } = await getData();
+  // const apiUrl = "posts?per_page=10&order=desc&orderby=date&_embed=1"
   return (
     <>
     <Head>
@@ -77,7 +77,7 @@ const Home = async () => {
 
     </Head>
       <main className="">
-        <HeroBanner></HeroBanner>
+        {/* <HeroBanner></HeroBanner>
         <div className={styles.promoWrap}>
           <div className={styles.container}>
             <div className={styles.promoBody}>
@@ -122,7 +122,7 @@ const Home = async () => {
             <div className={styles.headingLine}></div>
           </div>
         </div>
-        <ListingPage newdata={newdata} apiUrl={""}/>
+        <ListingPage newdata={newdata} apiUrl={""}/> */}
       </main>
     </>
   );
